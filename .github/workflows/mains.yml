@@ -16,7 +16,7 @@ jobs:
         repository: elestu/actions-dependacop
         ref: v0.0.1
         token: ${{ secrets.PRIVATE_REPO_ACCESS_TOKEN }}
-        path: .github/actions/my-action
+        path: .github/actions/actions-dependacop
     - name: Run My Action
       uses: ./.github/actions/actions-dependacop
       env:
