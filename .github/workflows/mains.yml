@@ -1,6 +1,6 @@
 on:
-  schedule:
-  - cron: 0 6 * * 1
+  #schedule:
+  #- cron: 0 6 * * 1
   workflow_dispatch:
 name: Update Dependencies
 jobs:
@@ -10,8 +10,15 @@ jobs:
     - uses: actions/checkout@master
     - name: set remote url
       run: git remote set-url --push origin https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-    - name: package-update
-      uses: taichi/actions-package-update@master
+    - name: Checkout GitHub Action Repo
+      uses: actions/checkout@v2
+      with:
+        repository: elestu/actions-dependacop
+        ref: v0.0.1
+        token: ${{ secrets.GIT_HUB_TOKEN }} # stored in GitHub secrets
+        path: .github/actions/my-action
+    - name: Run My Action
+      uses: ./.github/actions/actions-dependacop
       env:
         AUTHOR_EMAIL: hello@loopstudio.dev
         AUTHOR_NAME: Loopito
